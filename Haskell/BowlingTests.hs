@@ -14,3 +14,5 @@ testScoreGame game score =
 main = hspec $ do 
     describe "scoreGame" $ do 
         testScoreGame "9-9-9-9-9-9-9-9-9-9-" 90
+        testScoreGame "1-1-1-1-1-1-1-1-1-1-" 10
+        testScoreGame "12131415161718171611" 59
