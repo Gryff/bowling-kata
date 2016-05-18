@@ -30,18 +30,18 @@ addFrames (frame:[]) = frameValue frame
 addFrames (frame1:frame2:[]) = 
     case frame1 of 
         (10,Spare x) -> 10 + bonusPoints "Spare" [frame2]
-        (_,Spare x) -> 10 + (bonusPoints "Spare" [frame2]) + addFrames [frame2]
+        (_,Spare x) -> 10 + bonusPoints "Spare" [frame2] + addFrames [frame2]
         (_,Simple x y) -> frameValue frame1 + addFrames [frame2]
 addFrames (frame1:frame2:frame3:[]) = 
     case frame1 of 
         (10, Strike) -> 10 + bonusPoints "Strike" [frame2,frame3]
-        (_, Strike) -> 10 + (bonusPoints "Strike" [frame2,frame3]) + addFrames [frame2,frame3]
-        (_,Spare _) -> 10 + (bonusPoints "Spare" [frame2]) + addFrames [frame2,frame3]
+        (_, Strike) -> 10 + bonusPoints "Strike" [frame2,frame3] + addFrames [frame2,frame3]
+        (_,Spare _) -> 10 + bonusPoints "Spare" [frame2] + addFrames [frame2,frame3]
         (_,Simple _ _) -> frameValue frame1 + addFrames [frame2,frame3]
 addFrames (frame1:frame2:frame3:frames) = 
     case frame1 of
-        (_,Strike) -> 10 + (bonusPoints "Strike" [frame2,frame3]) + addFrames(frame2:frame3:frames)
-        (_,Spare _) -> 10 + (bonusPoints "Spare" [frame2]) + addFrames(frame2:frame3:frames)
+        (_,Strike) -> 10 + bonusPoints "Strike" [frame2,frame3] + addFrames(frame2:frame3:frames)
+        (_,Spare _) -> 10 + bonusPoints "Spare" [frame2] + addFrames(frame2:frame3:frames)
         (_,Simple _ _) -> frameValue frame1 + addFrames(frame2:frame3:frames)
 
 frameValue :: (FrameNumber,Frame) -> Int
